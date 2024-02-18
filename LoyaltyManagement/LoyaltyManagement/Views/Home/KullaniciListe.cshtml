@@ -1,0 +1,114 @@
+﻿@model List<LoyaltyManagement.ViewModels.KullaniciViewModel>
+@{
+    Layout = "_AdminLayout";
+}
+<link rel="shortcut icon" type="image/png" href="~/img/favicon.png">
+<!-- google font -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+<!-- fontawesome -->
+<link rel="stylesheet" href="~/css/all.min.css">
+<!-- bootstrap -->
+<link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
+<!-- owl carousel -->
+<link rel="stylesheet" href="~/css/owl.carousel.css">
+<!-- magnific popup -->
+<link rel="stylesheet" href="~/css/magnific-popup.css">
+<!-- animate css -->
+<link rel="stylesheet" href="~/css/animate.css">
+<!-- mean menu css -->
+<link rel="stylesheet" href="~/css/meanmenu.min.css">
+<!-- main style -->
+<link rel="stylesheet" href="~/css/main.css">
+<!-- responsive -->
+<link rel="stylesheet" href="~/css/responsive.css">
+
+<div>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 0;
+            }
+
+            .container {
+                max-width: 1300px;
+                margin: 20px auto;
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+
+            th, td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            th {
+                background-color: #3498db;
+                color: #fff;
+            }
+
+            tr:hover {
+                background-color: #f5f5f5;
+            }
+
+            .product-photo {
+                max-width: 50px;
+                max-height: 50px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+        </style>
+        <title>Stilize Edilmiş Tablo Örneği</title>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Kullanıcı Listesi</h2>
+            <table>
+                <thead>
+                    <tr>
+
+                        <th>Kullanıcı Adı ve Soyad</th>
+                        <th>Eposta</th>
+                        <th>Adres</th>
+                        <th>Aktifmi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var kullanici in Model)
+                    {
+                        <tr class="table-body-row">
+                            <td class="product-name">@kullanici.AdSoyad</td>
+                            <td class="product-name">@kullanici.EPosta</td>
+                            <td class="product-name">@kullanici.Adres</td>
+                            <td class="product-name">
+                                <input disabled type="checkbox" @(kullanici.Aktifmi ? "checked" : "") />
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </body>
+</html>
+
+</div>
+

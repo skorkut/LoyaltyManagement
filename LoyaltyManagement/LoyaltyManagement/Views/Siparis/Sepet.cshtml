@@ -1,0 +1,156 @@
+﻿@model List<LoyaltyManagement.ViewModels.SepetViewModel>
+@{
+    Layout = "_Layout";
+}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        ToplamiGetir();
+        $(".urunsil").click(function () {
+            var add = $(this).attr("data_id");
+            if (add != '') {
+                $.post("/Siparis/SepettenSil", { "sepetid": add },
+                    function (data) {
+                        location.reload();
+                    });
+            }
+        });
+    });
+    function ToplamiGetir() {
+        $.ajax({
+            type: 'GET',
+            url: '/Siparis/GetUrunToplam',
+            success: function (data) {
+                $('#toplam').text(data);
+            },
+            error: function () {
+                $('#toplam').text('Değer alınamadı.');
+            }
+        });
+    }
+    function AdetDuzenle(UrunId, SepetId, numeric) {
+        UrunStokKontrol(UrunId,numeric);
+        $.ajax({
+            type: 'POST',
+            data: { sepetid: SepetId, adet: numeric.value },
+            url: '/Siparis/AdetKaydet',
+            success: function () {
+                ToplamiGetir();
+            },
+            error: function () {
+            }
+        });
+    }
+    function UrunStokGetir(UrunId, callback) {
+        debugger;
+        $.ajax({
+            type: 'POST',
+            data: { Urunid: UrunId },
+            url: '/Urun/UrunStokGetir',
+            success: function (result) {
+                callback(result);
+            },
+            error: function () {
+            }
+        });
+    }
+    function UrunStokKontrol(UrunId, numeric) {
+        debugger;
+        UrunStokGetir(UrunId, function (stok) {
+            var urunadet = $("#urunadet").val();
+            if (urunadet > stok) {
+                alert("Ürün adeti stok miktarını aşıyor. Yazılabilecek maksimum değer stok miktarı olarak güncellendi.");
+                numeric.value = stok;
+            }
+        });       
+    }
+</script>
+
+<div class="cart-section mt-150 mb-150">
+    <div class="container">
+        <h2 style="border-bottom: 1px solid #000; font-weight: 500; line-height: 4.25rem; ">Alışveriş Sepeti</h2>
+        <br />
+        @if (Model == null || !Model.Any())
+        {
+
+            <div class="alert alert-warning">
+                <strong>Uyarı</strong> Sepetiniz şu anda boş. Bir şeyler eklemek için alışverişe başlayabilirsiniz!
+            </div>
+        }
+
+        else
+        {
+            <div class="row">
+                <div class="col-lg-8 col-md-12">
+                    <div class="cart-table-wrap" style="height:150px;">
+                        <div class="table-container" style="max-height: 300px; overflow-y: scroll;">
+                            <table class="cart-table" style="width: 100%; border-collapse: collapse;">
+                                <thead class="cart-table-head" style="position: sticky; top: 0; background-color: #f8f8f8;">
+                                    <tr class="table-head-row">
+                                        <th class="product-remove" style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;"></th>
+                                        <th class="product-image">Ürün Fotoğrafı</th>
+                                        <th class="product-name">Ürün İsmi</th>
+                                        <th class="
+">Fiyat</th>
+                                        <th class="product-quantity">Adet</th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var urun in Model)
+                                    {
+
+
+
+                                        <tr class="table-body-row">
+                                            <td class="product-remove"><a class="urunsil" href="#" data_id="@urun.SepetId"><i class="far fa-window-close"></i></a></td>
+                                            <td class="product-image"><img src="@urun.UrunFotografi" alt=""></td>
+                                            <td class="product-name">@urun.UrunAdi</td>
+                                            <td class="product-price">@urun.UrunFiyati</td>
+                                            <td class="product-quantity"><input type="number" id="urunadet" value="@urun.Adet" onchange="AdetDuzenle('@urun.UrunId','@urun.SepetId', this)"></td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+                            </table>
+                            @if (Model.Count != 0)
+                            {
+                                <a asp-action="SepetiBosalt" asp-controller="Siparis" class="cart-btn" style="margin-left:540px; margin-top:20px;"><i class="fas fa-trash-alt"></i> Sepeti Boşalt</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="total-section">
+                        <table class="total-table">
+                            <thead class="total-table-head">
+                                <tr class="table-total-row">
+                                    <th>Toplam</th>
+                                    <th>Fiyat</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+
+                                <tr class="total-data">
+                                    <td><strong>Toplam: </strong></td>
+                                    <td id="toplam"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        @if (Model.Count != 0)
+                        {
+                            <div class="cart-buttons" style="float:right;">
+                                <a asp-action="SiparisVer" asp-controller="Siparis" class="cart-btn">Sipariş Ver</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

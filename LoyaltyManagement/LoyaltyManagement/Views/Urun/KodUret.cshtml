@@ -1,0 +1,96 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<html>
+    <body>
+<div style="width:600px; margin-left:20px;">
+
+    <label for="quantitiy">Adet</label>
+    <input type="number" id="quantity" name="quantity" min="0" max="10" style="width:200px;">
+    <span id="quantityError" style="color: red;"></span>
+
+        <div style ="height:50px;">
+
+            <label for="points" style="margin-top: 30px;">Puan</label>
+            <input type="number" id="points">
+            <span id="pointsError" style="color: red;"></span>
+        </div>
+    <div style="height:100px;">
+            <button id="sendData" style="margin-top:20px; margin-left:163px; border-radius:5px; background-color:#4e73df; color:rgba(255,255,255,.8)">Kod Üret</button>
+            <div id="result"></div>
+    </div>
+
+    </div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#quantity").on("input", function () {
+                var quantityValue = parseInt($(this).val());
+
+              
+
+            // Girilen değerin 0 ile 10 arasında olup olmadığını kontrol et
+            if (quantityValue < 1 || quantityValue > 10 || isNaN(quantityValue)) {
+                $("#quantityError").text("1 ile 10 arasında bir değer girin.");
+                $(this).val("");
+            } else {
+                $("#quantityError").text("");
+            }
+
+             
+        });
+    });
+
+        $(function () {
+            $("#points").on("input", function () {
+                var pointsValue = parseInt($(this).val(), 10);
+
+                // Girilen değerin 1 ile 50 arasında olup olmadığını kontrol et
+                if (isNaN(pointsValue) || pointsValue < 1 || pointsValue > 50) {
+                    $("#pointsError").text("1 ile 50 arasında bir değer girin.");
+                } else if (pointsValue % 5 !== 0) {
+                    // Puanın 5'in katları olup olmadığını kontrol et
+                    $("#pointsError").text("Puan 5'in katları olmalıdır.");
+                } else {
+                    $("#pointsError").text("");
+                }
+            });
+        });
+
+        $(function () {
+            $("#sendData").on("click", function () {
+                var quantityValue = $("#quantity").val();
+                var pointsValue = $("#points").val();
+                if (pointsValue % 5 != 0) {
+                    return alert("Sadece 5 ve katlarını girebilirsiniz.");
+                }      
+                else if (pointsValue > 50) {
+                    return alert("Puan en fazla 50 olabilir. Tek seferde maksimum 50 puanlık kod üretilebilir.");
+                }
+                // Ajax isteği
+                $.ajax({
+                    type: "POST",
+                    url: "/Urun/KodKaydet", // Controller'daki Action'a yönlendir
+                    data: { quantity: quantityValue, points: pointsValue },
+                    success: function (response) {
+                        // İşlem başarılıysa sonuçları ekrana yazdır
+                        $("#result").html(response);
+                        alert('İşlem Başarılı')
+
+                        $("#quantity").val("");
+                        $("#points").val("");
+                    },
+                    error: function (error) {
+                        console.error("Ajax isteği başarısız oldu:", error);
+                    }
+                });
+            });
+        });
+
+         
+
+</script>
+
+</body>
+    </html>

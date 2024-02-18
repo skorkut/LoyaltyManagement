@@ -1,0 +1,107 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = LoyaltyManagement
+build_property.RootNamespace = LoyaltyManagement
+build_property.ProjectDir = C:\Users\serka\OneDrive\Masaüstü\Loyalty Management\LoyaltyManagement\LoyaltyManagement\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\serka\OneDrive\Masaüstü\Loyalty Management\LoyaltyManagement\LoyaltyManagement
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Home/AdminPanel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pblBhbmVsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Home/Cuzdan.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDdXpkYW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Home/KullaniciBilgiGuncelle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxLdWxsYW5pY2lCaWxnaUd1bmNlbGxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Home/KullaniciListe.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxLdWxsYW5pY2lMaXN0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Home/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Shared/_AdminLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BZG1pbkxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Siparis/KartBilgi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2lwYXJpc1xLYXJ0QmlsZ2kuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Siparis/Sepet.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2lwYXJpc1xTZXBldC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Siparis/SiparisListe.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2lwYXJpc1xTaXBhcmlzTGlzdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Siparis/SiparisVer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2lwYXJpc1xTaXBhcmlzVmVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Urun/KodUret.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXJ1blxLb2RVcmV0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Urun/UrunDetay.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXJ1blxVcnVuRGV0YXkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Urun/UrunEkle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXJ1blxVcnVuRWtsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Urun/Urunler.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXJ1blxVcnVubGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Urun/UrunListe.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXJ1blxVcnVuTGlzdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/serka/OneDrive/Masaüstü/Loyalty Management/LoyaltyManagement/LoyaltyManagement/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-n8b8plltkr

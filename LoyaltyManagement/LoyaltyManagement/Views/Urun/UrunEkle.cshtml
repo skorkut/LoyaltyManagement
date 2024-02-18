@@ -1,0 +1,132 @@
+﻿@model LoyaltyManagement.ViewModels.UrunViewModel
+
+@{
+    Layout = "_AdminLayout";
+}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 1em;
+    }
+
+    label {
+        margin-bottom: 0.5em;
+    }
+
+    input[type="text"], textarea, select, input[type="date"], input[type="number"] {
+        margin-bottom: 1em;
+        padding: 0.5em;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        padding: 0.5em;
+        border: none;
+        border-radius: 4px;
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    input[type="file"] {
+        margin-top: 1em;
+    }
+
+        input[type="file"] + label {
+            display: inline-block;
+            padding: 0.5em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f2f2f2;
+            cursor: pointer;
+            width: 100%;
+        }
+</style>
+<html>
+<div style="width:600px; margin-left:20px;">
+    <form asp-action="UrunKaydet" method="post" enctype="multipart/form-data" id="urunekleForm">
+        <label for="product-name">Ürün İsmi</label><br>
+        <input asp-for="UrunAdi" type="text" id="urunadi" value="@Model.UrunAdi" required><br>
+        <label for="product-name">Ürün Fiyatı</label><br>
+        <input asp-for="UrunFiyati" type="number" id="urunfiyat" value="@Model.UrunFiyati" min="1" required><br>
+        <label for="product-name">Ürün Adet</label><br>
+        <input asp-for="UrunAdedi" type="number" id="urunadet" value="@Model.UrunAdedi" min="1" required><br>
+        <label for="description">Ürün Açıklaması</label><br>
+        <textarea asp-for="UrunAciklamasi" id="UrunAciklamasi" name="UrunAciklamasi" required>@Model.UrunAciklamasi</textarea> <br>
+        <label for="category">Kategori</label><br>
+        <select id="kategori" name="kategori" required>
+            @foreach (var option in ViewBag.KategoriOptions)
+            {
+                <option value="@option.Value">@option.Text</option>
+
+            }
+        </select>
+        <input type="hidden" asp-for="KategoriId" id="hdnKategoriId" />
+        <br>
+        <label for="marka">Markalar</label><br>
+        <select id="marka" name="marka" required></select><br />
+        <input type="hidden" asp-for="MarkaId" id="hdnMarkaId" />
+        <input asp-for="ProductImages" type="file" id="ProductImages" name="ProductImages" multiple required> <br />
+        <input type="hidden" asp-for="UrunId" id="hdnUrunId" />
+        <input type="submit" value="Kaydet"  style="background-color:#4e73df;">
+    </form>
+</div>
+<script>
+    $(document).ready(function () {
+        debugger;
+        // Sayfa yüklendiğinde optionsDropdown'ı doldur
+        var kategoriId = '@Model.KategoriId';
+        if (kategoriId != '') {
+            $("#kategori").val(kategoriId);
+        }
+        fillOptions();
+
+        // Parametre değiştikçe optionsDropdown'ı güncelle
+        $("#kategori").on("change", function () {
+            fillOptions();
+            var kategoriId = $("#kategori").val();
+            $("#hdnKategoriId").val(kategoriId);
+        });
+
+        $("#marka").on("change", function () {
+            var markaId = $("#marka").val();
+            $("#hdnMarkaId").val(markaId);
+        });
+    });
+    function fillOptions() {
+        var selectedOption = $("#kategori").val();
+
+        $.ajax({
+            url: "/Urun/MarkalariGetir",
+            data: { kategoriId: selectedOption },
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                // AJAX başarılı olursa select elementini güncelle
+                var optionsDropdown = $("#marka");
+                optionsDropdown.empty();
+                $.each(data, function (index, item) {
+                    optionsDropdown.append('<option value="' + item.markaId + '">' + item.markaAdi + '</option>');
+                });
+                var markaId = '@Model.MarkaId';
+                if (markaId != '') {
+                    optionsDropdown.val(markaId);
+                }
+                // Seçilen değeri belirle
+                //optionsDropdown.val(selectedOption);
+            },
+            error: function () {
+                console.error("AJAX request failed.");
+            }
+        });
+    }
+</script>
+
+</html>

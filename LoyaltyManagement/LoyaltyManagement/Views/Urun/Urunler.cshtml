@@ -1,0 +1,55 @@
+﻿@model List<LoyaltyManagement.ViewModels.UrunViewModel>
+
+@{
+	Layout = "_Layout";
+}
+<div class="row">
+@foreach (var urun in Model)
+{
+		<div class="col-lg-4 col-md-6 text-center">
+			<div class="single-product-item">
+				<div class="product-image">
+					<a asp-action="UrunDetay" asp-controller="Urun" asp-route-urunid="@urun.UrunId"><img src="@urun.UrunFotograflari[0].FotografAdres" alt=""></a>
+				</div>
+				<h3 id="urunadi">@urun.UrunAdi</h3>
+				<h4>@urun.KategoriAdi / @urun.MarkaAdi</h4>
+				<p class="product-price"><span>Fiyat</span> @urun.UrunFiyati.ToString("N") ₺ </p>
+				@* <a asp-action="SepeteEkle" asp-controller="Siparis" asp-route-urunid="@urun.UrunId" class="cart-btn"><i class="fas fa-shopping-cart"></i> Sepete Ekle</a> *@
+				@if (urun.UrunAdedi == 0)
+				{
+					<a class="cart-btn" style="background-color:grey; cursor: not-allowed;"><i class="fas fa-shopping-cart" aria-hidden="true"></i>Sepete Ekle</a>
+				}
+				else
+				{
+					<a href="#" class="cart-btn UrunLink" data_id="@urun.UrunId"><i class="fas fa-shopping-cart" aria-hidden="true"></i>Sepete Ekle</a>	
+				}				
+			</div>
+		</div>
+    }
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(function () {
+		// Document.ready -> link up remove event handler
+		$(".UrunLink").click(function () {
+			// Get the id from the link
+			var add = $(this).attr("data_id");
+			//alert(recordToDelete);
+			if (add != '') {
+				// Perform the ajax post
+				$.post("/Siparis/SepeteEkle", { "urunid": add },
+					function (data) {
+						location.reload();
+					});
+			}
+		});
+	});
+</script>
+<style>
+	#urunadi {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
+</style>

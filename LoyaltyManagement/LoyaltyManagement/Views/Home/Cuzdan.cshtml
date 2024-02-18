@@ -1,0 +1,120 @@
+﻿@model int
+@{
+    Layout = "_Layout";
+}
+
+<style>
+    .progress-pie-chart {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background-color: #E5E5E5;
+        position: relative;
+    }
+
+        .progress-pie-chart.gt-50 {
+            background-color: #F28123;
+        }
+
+    .ppc-progress {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        left: calc(50% - 100px);
+        top: calc(50% - 100px);
+        width: 200px;
+        height: 200px;
+        clip: rect(0, 200px, 200px, 100px);
+    }
+
+        .ppc-progress .ppc-progress-fill {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            left: calc(50% - 100px);
+            top: calc(50% - 100px);
+            width: 200px;
+            height: 200px;
+            clip: rect(0, 100px, 200px, 0);
+            background: #F28123;
+            transform: rotate(60deg);
+        }
+
+    .gt-50 .ppc-progress {
+        clip: rect(0, 100px, 200px, 0);
+    }
+
+        .gt-50 .ppc-progress .ppc-progress-fill {
+            clip: rect(0, 200px, 200px, 100px);
+            background: #E5E5E5;
+        }
+
+    .ppc-percents {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        left: calc(50% - 173.9130434783px/2);
+        top: calc(50% - 173.9130434783px/2);
+        width: 173.9130434783px;
+        height: 173.9130434783px;
+        background: #fff;
+        text-align: center;
+        display: table;
+    }
+
+        .ppc-percents span {
+            display: block;
+            font-size: 2.6em;
+            font-weight: bold;
+            color: #F28123;
+        }
+
+    .pcc-percents-wrapper {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    body {
+        font-family: Arial;
+        background: #f7f7f7;
+    }
+
+    .progress-pie-chart {
+        margin: 50px auto 0;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-lg-8 offset-lg-2 text-center">
+        <div class="section-title">
+            <h3 style="padding-top:10px;"><span class="orange-text">Cüzdan</span></h3>
+            <h6>Kazandığınız puanları maksimum 100 olarak elde edip satın alacağınız ürünlerden %10 indirim sağlayabilirsiniz</h6>
+        </div>
+        <div class="progress-pie-chart" data-percent="@Model">
+            <div class="ppc-progress">
+                <div class="ppc-progress-fill"></div>
+            </div>
+            <div class="ppc-percents">
+                <div class="pcc-percents-wrapper">
+                    <span>Puan</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(function () {
+        var $ppc = $('.progress-pie-chart'),
+            percent = parseInt($ppc.data('percent')),
+            deg = 360 * percent / 100;
+        if (percent > 50) {
+            $ppc.addClass('gt-50');
+        }
+        $('.ppc-progress-fill').css('transform', 'rotate(' + deg + 'deg)');
+        $('.ppc-percents span').html('Puan ' + percent);
+    });
+</script>

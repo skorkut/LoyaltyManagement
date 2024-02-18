@@ -1,0 +1,391 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+    <!-- title -->
+    <title>Loyalty Management</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/png" href="~/img/favicon.png">
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="~/css/all.min.css">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="~/css/owl.carousel.css">
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="~/css/magnific-popup.css">
+    <!-- animate css -->
+    <link rel="stylesheet" href="~/css/animate.css">
+    <!-- mean menu css -->
+    <link rel="stylesheet" href="~/css/meanmenu.min.css">
+    <!-- main style -->
+    <link rel="stylesheet" href="~/css/main.css">
+    <!-- responsive -->
+    <link rel="stylesheet" href="~/css/responsive.css">
+
+
+
+
+    <style>
+        .ui-widget-header, .ui-state-default, ui-button {
+            background: #b9cd6d;
+            border: 1px solid #b9cd6d;
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="circle"></div>
+        </div>
+    </div>
+    <div class="top-header-area" id="sticker" style="width:1520px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 text-center">
+                    <div class="main-menu-wrap" style="margin-left:-170px;">
+                        <!-- logo -->
+                        <div class="site-logo">
+                            <a asp-action="Index" asp-controller="Home">
+                                <img src="~/img/logo.png" alt="" style="margin-top:-25px;">
+                            </a>
+                        </div>
+                        <!-- logo -->
+                        <!-- menu start -->
+                        <nav class="main-menu">
+                            <ul>
+                                @foreach (var kategori in ViewBag.MenuItems as List<LoyaltyManagement.ViewModels.KategoriMarkaViewModel>)
+                                {
+                                    <li>
+                                        <a asp-action="Urunler" asp-controller="Urun" asp-route-kategoriid="@kategori.KategoriId">@kategori.KategoriAdi</a>
+                                        <ul class="sub-menu">
+                                            @foreach(var marka in kategori.MarkaListe){
+                                                <li><a asp-action="Urunler" asp-controller="Urun" asp-route-kategoriid="@kategori.KategoriId" asp-route-markaid="@marka.MarkaId">@marka.MarkaAdi</a></li>
+                                            }                                                
+                                         </ul>
+                                    </li>
+                                }
+                                <li>
+                                    <div class="header-icons" style="margin-right:-180px">
+                                        <a asp-action="Sepet" asp-controller="Siparis" class="shopping-cart"><i class="fas fa-shopping-cart"><sup style="top:-0.8em; font-size:10pt; font-family:'Open Sans'">@ViewBag.CartCount</sup></i> Sepet</a>
+                                        @if (ViewBag.AktifKullaniciAdi != "")
+                                        {
+                                            <a asp-action="Cuzdan" asp-controller="Home"><i class="fas fa-wallet"></i> Cüzdan</a>
+                                        }                                        
+                                        @* Bu kod giriş yap butonuna tıklandığında Home Controllerdaki Logincshtml e yönlendirir. *@
+                                        @if (ViewBag.AktifKullaniciAdi != "")
+                                        {
+                                            <a asp-action="KullaniciBilgiGuncelle" asp-controller="Home"><i class="far fa-user"></i> @ViewBag.AktifKullaniciAdi</a>
+                                            <a href="#" id="kodOkutLink" onclick="acModal()"><i class="fas fa-keyboard"></i> Kod Okut</a>
+                                            <a asp-action="CikisYap" asp-controller="Home" class="fas fa-sign-out-alt" style="color: #ffffff; font-size:16px;"></a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-action="Login" asp-controller="Home"><i class="far fa-user"></i> Giriş Yap</a>
+                                        }                                        
+                                    </div>
+                                </li>
+                            </ul>
+                        </nav>
+                        <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                        <div class="mobile-menu"></div>
+                        <!-- menu end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="search-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <span class="close-btn"><i class="fas fa-window-close"></i></span>
+                    <div class="search-bar">
+                        <div class="search-bar-tablecell">
+                            <h3>Search For:</h3>
+                            <input type="text" placeholder="Keywords">
+                            <button type="submit">Search <i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="search-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <span class="close-btn"><i class="fas fa-window-close"></i></span>
+                    <div class="search-bar">
+                        <div class="search-bar-tablecell">
+                            <h3>Search For:</h3>
+                            <input type="text" placeholder="Keywords">
+                            <button type="submit">Search <i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end search area -->
+    <!-- hero area -->
+    <div class="hero-area hero-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 offset-lg-2 text-center">
+                    <div class="hero-text">
+                        <div class="hero-text-tablecell">
+                            <p class="subtitle">Okut & Kazan</p>
+                            <h1>Puanları Kazan Alışverişe Başla !</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted" style="margin-top:50px;">
+        <div class="footer-area">
+            <div class="container">
+                <div class="row" style="width:2000px;">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-box about-widget">
+                            <h2 class="widget-title">Hakkımızda</h2>
+                            <p>Teknolojik ürünlerden oluşan sitemizde anlaşmalı olduğumuz kurumsal markalardan yapılan alışverişler sonrasında, paketlerinden çıkan kodlardan kazanlılan puanlar ile sitemizde ki ürünleri indirimli bir şekilde satın alabilirsiniz.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6" style="display:flex;">
+                        <div class="footer-box get-in-touch">
+                            <h2 class="widget-title">İşbirlikçilerimiz</h2>
+                            <ul>
+                                <li><img src="~/img/isbirlikci1.png" alt="" style="width:100px;" ></li>
+                                <li><img src="~/img/isbirlikci2.png" alt="" style="width:100px;"></li>
+                                <li><img src="~/img/isbirlikci3.png" alt="" style="width:100px;"></li>
+                              
+                            </ul>
+                            
+                        </div>
+                        <div class="footer-box get-in-touch" style="padding-top:80px;">
+                         
+                            <ul>
+                              
+                                <li><img src="~/img/isbirlikci4.png" alt="" style="width:100px;"></li>
+                                <li><img src="~/img/isbirlikci5.png" alt="" style="width:100px;"></li>
+                                <li><img src="~/img/isbirlikci6.png" alt="" style="width:100px;"></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-box about-widget" style="width:250px;">
+                            <h2 class="widget-title">İletişim</h2>
+                            <ul>
+                                <li><i class="far fa-envelope"></i> discountshop@gmail.com</li>
+
+                                <li><i class="fas fa-phone-volume"></i> 0555 444 33 22</li>
+                                
+                                <li><i class="fas fa-map-pin"></i> Büyükdere Cad. Mecidiyeköy Mah. Saadet Apt, No: 65/3, Şişli/İstanbul</li>
+                            </ul>
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- copyright -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <p>Copyrights &copy; 2023 - Tüm hakları saklıdır.</p>
+                </div>
+                <div class="col-lg-6 text-right col-md-12">
+                    <div class="social-icons">
+                        <ul>
+                            <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-dribbble"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modalKampanya">
+        <div>
+            <h3 style="margin-top:-18px; margin-right:10px;">Kampanya Kodu</h3>
+            <form>
+                <p><input id="txtkampanyakodModal" class="textInput" type="text" placeholder="Kod Giriniz"></p>
+                <p style="float:right;"><input type="submit" value="Uygula" onclick="KodKaydet()"></p>
+            </form>
+            <span class="close" onclick="closeModal()">&times;</span>
+        </div>
+    </div>
+    <!-- end copyright -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <!-- jquery -->
+    <script src="~/js/jquery-1.11.3.min.js"></script>
+    <!-- bootstrap -->
+    <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    <!-- count down -->
+    <script src="~/js/jquery.countdown.js"></script>
+    <!-- isotope -->
+    <script src="~/js/jquery.isotope-3.0.6.min.js"></script>
+    <!-- waypoints -->
+    <script src="~/js/waypoints.js"></script>
+    <!-- owl carousel -->
+    <script src="~/js/owl.carousel.min.js"></script>
+    <!-- magnific popup -->
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <!-- mean menu -->
+    <script src="~/js/jquery.meanmenu.min.js"></script>
+    <!-- sticker js -->
+    <script src="~/js/sticker.js"></script>
+    <!-- main js -->
+    <script src="~/js/main.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Kod Okut bağlantısına tıklanınca modalı aç
+            $("#kodOkutLink").on("click", function (e) {
+                e.preventDefault();
+                openModal();
+            });
+        });
+        function openModal() {
+            // Modalı aç
+            $("#modalKampanya").fadeIn();
+
+            // Kullanıcıdan alınan kodu modal içindeki input'a kopyala
+            var kampanyaKodu = $("#txtkampanyakod").val();
+            $("#txtkampanyakodModal").val(kampanyaKodu);
+        }
+
+
+        $(".close").click(function () {
+            closeModal();
+        });
+
+        $(window).click(function (event) {
+            if (event.target == $("#modalKampanya")[0]) {
+                closeModal();
+            }
+        });
+
+        function closeModal() {
+            $("#modalKampanya").fadeOut(); // jQuery fadeIn/fadeOut kullanımı
+        }
+
+        function KodKaydet() {
+            var kod = $("#txtkampanyakodModal").val();
+            $.post("/Home/KampanyaKodKaydet", { "kod": kod },
+                function (data) {
+                    alert(data);
+                });
+        }
+    </script>
+    <style>
+        #modalKampanya {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+            #modalKampanya div {
+                background-color: #fff;
+                width: 50%;
+                padding: 30px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 1000;
+                overflow: hidden; /* Yatay scroll çubuğunu engelle */
+                position: relative; /* Relative olarak değiştirildi */
+            }
+
+            #modalKampanya h3 {
+                margin-top: 0;
+                margin-bottom: 20px;
+                font-size: 24px;
+                color: #333;
+            }
+
+            #modalKampanya form {
+                margin-bottom: 20px;
+            }
+
+            #modalKampanya p {
+                margin: 15px 0;
+            }
+
+            #modalKampanya input[type="text"] {
+                width: calc(100% - 20px); /* 20 piksel iç kenar boşluğu bırak */
+                padding: 10px;
+                box-sizing: border-box;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            #modalKampanya input[type="button"] {
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+                #modalKampanya input[type="button"]:hover {
+                    background-color: #45a049;
+                }
+
+            #modalKampanya .close {
+                color: #aaa;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+                #modalKampanya .close:hover,
+                #modalKampanya .close:focus {
+                    color: black;
+                    text-decoration: none;
+                }
+
+
+
+    </style>
+</body>
+</html>

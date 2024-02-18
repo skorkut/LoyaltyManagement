@@ -1,0 +1,71 @@
+﻿@model LoyaltyManagement.Models.Kullanici
+@{
+    Layout = "_Layout";
+}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#SifreGuncelle").click(function () {
+            var sifre1 = $("#sifre1").val();
+            var sifre2 = $("#sifre2").val();
+            if (sifre1 != sifre2) {
+                return alert("Girdiğiniz şifreler birbiriyle aynı değildir.")
+            }
+            $.post("/Home/SifreGuncelle", { "sifre": sifre1 },
+                function () {
+                    alert("Şifreniz başarı ile güncellenmiştir.")
+                });
+        });
+    });
+</script>
+
+<div class="accordion" id="accordionExample">
+    <div class="card single-accordion">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="margin-top:5px;">
+                    Kullanıcı Bilgi Güncelleme
+                </button>
+            </h5>
+        </div>
+
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+                <div class="billing-address-form">
+                    <form asp-action="KullaniciBilgiGuncelle" method="post">
+                        <p><input asp-for="Ad" type="text" value="@Model.Ad" placeholder="İsim"></p>
+                        <p><input asp-for="Soyad" type="text" value="@Model.Soyad" placeholder="Soyisim"></p>
+                        <p><input asp-for="EPosta" type="email" value="@Model.EPosta" placeholder="EPosta"></p>
+                        <p><textarea asp-for="Adres" value="@Model.Adres" cols="30" rows="10" placeholder="Adres">@Model.Adres</textarea></p>
+                        <input type="hidden" asp-for="KullaniciId" />
+                        <input type="submit" name="submit" id="KullaniciBilgiGuncelle" class="form-submit" value="Güncelle" style="float:right; margin-bottom:10px; font-family:'Poppins', sans-serif;" />
+                        @* <a href="#" id="KullaniciBilgiGuncelle" class="boxed-btn" style="float:right; margin-bottom:10px;">Güncelle</a> *@
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card single-accordion">
+        <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    Şifre Güncelleme
+                </button>
+            </h5>
+        </div>
+
+        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+                <div class="billing-address-form">
+                    <form action="index.html">
+                        <p>Şifre<input type="password" id="sifre1" placeholder="Şifre"></p>
+                        <p>Şifre Tekrar <input type="password" id="sifre2" placeholder="Şifre Tekrar"></p>
+                        <a href="#" id="SifreGuncelle" class="boxed-btn" style="float:right; margin-bottom:10px;">Şifre Güncelle</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

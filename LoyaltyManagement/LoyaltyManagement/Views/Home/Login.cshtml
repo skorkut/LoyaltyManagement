@@ -1,0 +1,160 @@
+﻿@model LoyaltyManagement.ViewModels.LoginRegisterViewModel
+@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            overflow: hidden;
+
+        }
+
+            body::after {
+                content: "";
+                background: url('/Loginimages/signup-bg.jpg');
+                background-size: cover;
+                opacity: 0.8;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                position: absolute;
+                z-index: -1;
+                background-repeat: no-repeat;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            border-bottom: 1px solid #ccc;
+            
+        }
+
+            /* Style the buttons inside the tab */
+            .tab button {
+                background-color: inherit;
+                float: left;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+                font-size: 17px;
+
+            }
+
+                /* Change background color of buttons on hover */
+                .tab button:hover {
+                    background-color: #ddd;
+                }
+
+                /* Create an active/current tablink class */
+                .tab button.active {
+                    background-color: #ccc;
+                }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            debugger;
+            var hatamesaji = '@TempData["ErrorMessage"]';
+            if (hatamesaji != '')
+                alert(hatamesaji);
+            GirisYap();
+        });
+        function GirisYap() {
+            $("#kayit").hide();
+            $("#giris").show();
+        }
+        function KayitOl() {
+            $("#kayit").show();
+            $("#giris").hide();
+        }
+
+    </script>
+</head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Loyalty Management</title>
+
+
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="/Logincss/style.css">
+</head>
+<body>
+
+    <div class="main">
+
+        @*  <img src="/Loginimages/signup-bg.jpg" alt=""> *@
+        <div class="container">
+            <div class="signup-content">
+                    <div class="tab">
+                        <button class="tablinks" onclick="GirisYap()">Giriş Yap</button>
+                        <button class="tablinks" onclick="KayitOl()">Kayit Ol</button>
+
+                    </div>
+                    <form asp-action="Login" id="formGiris" method="post" style="margin-top:15px">
+                    <div id="giris">
+                    <div class="form-group">
+                            <input asp-for="EPosta" type=" email" class="form-input"  id="email" placeholder="E-Mail" />
+                    </div>
+                    <div class="form-group">
+                            <input asp-for="Sifre" type="password" class="form-input"  id="password" placeholder="Şifre" />
+                        <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="submit" id="submit" class="form-submit" value="Giriş Yap" />
+                    </div>
+                    </div>
+                    </form>
+                    <form asp-action="Register" id="kayitGiris"  method="post">
+                    <div id="kayit" style="display:none;">
+                        @* <h2 class="form-title">Create account</h2> *@
+                        <div class="form-group">
+                            <input asp-for="Ad" type="text" class="form-input"  id="name" placeholder="Ad" />
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="Soyad" type="text" class="form-input"  id="name" placeholder="SoyAd" />
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="EPosta" type="email" class="form-input"  id="email" placeholder="E-Mail" />
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="Sifre" type="password" class="form-input"  id="password" placeholder="Şifre" />
+                            <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                        </div>
+                       
+                       
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Kayıt Ol" />
+                        </div>
+                    </div>
+               </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="/Loginjs/jquery/jquery.min.js"></script>
+    <script src="/Loginjs/main.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
